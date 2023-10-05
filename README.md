@@ -1,2 +1,87 @@
-# PAMA
-PAMA: Position-aware masked autoencoder for histopathology WSI representation learning
+# PAMA:Position-aware masked autoencoder for histopathology WSI representation learning
+This is a PyTorch implementation of the paper [PAMA](https://doi.org/10.1007/978-3-031-43987-2_69):
+
+
+### Pre-train
+
+Run the codes on the slurm with multiple GPUs:
+```
+#!/bin/bash
+
+#SBATCH -w gpu0[1]
+#SBATCH --gres=gpu:2
+#SBATCH -N 1
+#SBATCH -p com
+#SBATCH --cpus-per-task=40
+#SBATCH -o tcgaLung_pama_pretrain.log
+
+srun python ./posemb_pretrain.py \
+  --dist-url 'tcp://localhost:10001' \
+  --b 18 \
+  --train './data/train.csv' \
+  --mask_ratio 0.75 \
+  --in-chans 384 \
+  --lr 1e-3 \
+  --epochs 100 \
+  --max-size 2048 \
+  --max-kernel-num 128 \
+  --patch-per-kernel 18 \
+  --multiprocessing-distributed \
+  --save-path ./tcgaLung_pama_pretrain \
+  /data_path
+
+```
+
+### Fine-tuning and linear-probing
+
+Run on on multiple GPUs:
+```
+#!/bin/bash
+
+#SBATCH -w gpu0[1]
+#SBATCH --gres=gpu:2
+#SBATCH -N 1
+#SBATCH -p com
+#SBATCH --cpus-per-task=24
+#SBATCH -o tcgaLung_pama_finetune.log
+
+source activate my_base
+srun python ./posemb_finetune.py \
+  --dist-url 'tcp://localhost:10001' \
+  --b 12 \
+  --train './data/train.csv' \
+  --test './data/test.csv' \
+  --finetune "./tcgaLung_pama_pretrain/checkpoints/checkpoint_0099.pth.tar" \
+  --in-chans 384 \
+  --lr 1e-3 \
+  --epochs 50 \
+  --num-classes 3 \
+  --max-size 2048 \
+  --max-kernel-num 128 \
+  --weighted-sample \
+  --patch-per-kernel 18 \
+  --multiprocessing-distributed \
+  --save-path ./tcgaLung_pama_finetune/ \
+  /data_path
+```
+
+
+
+
+If the code is helpful to your research, please cite:
+```
+@InProceedings{10.1007/978-3-031-43987-2_69,
+author="Wu, Kun 
+and Zheng, Yushan
+and Shi, Jun
+and Xie, Fengying
+and Jiang, Zhiguo",
+title="Position-Aware Masked Autoencoder for Histopathology WSI Representation Learning",
+booktitle="Medical Image Computing and Computer Assisted Intervention -- MICCAI 2023",
+year="2023",
+publisher="Springer Nature Switzerland",
+address="Cham",
+pages="714--724",
+isbn="978-3-031-43987-2"
+}
+```
