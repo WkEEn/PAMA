@@ -16,7 +16,7 @@ Run the codes on the slurm with multiple GPUs:
 #SBATCH --cpus-per-task=40
 #SBATCH -o tcgaLung_pama_pretrain.log
 
-srun python ./posemb_pretrain.py \
+srun python ./main_pretrain.py \
   --dist-url 'tcp://localhost:10001' \
   --b 18 \
   --train './data/train.csv' \
@@ -44,7 +44,7 @@ Run on on multiple GPUs:
 #SBATCH -o tcgaLung_pama_finetune.log
 
 source activate my_base
-srun python ./posemb_finetune.py \
+srun python ./main_finetune.py \
   --dist-url 'tcp://localhost:10001' \
   --b 12 \
   --train './data/train.csv' \
@@ -71,7 +71,7 @@ srun python ./posemb_finetune.py \
 #SBATCH -o tcgaLung_pama_linear.log
 
 source activate my_base
-srun python ./posemb_linprobe.py \
+srun python ./main_linprobe.py \
   --dist-url 'tcp://localhost:10001' \
   --b 12 \
   --train './data/train.csv' \
