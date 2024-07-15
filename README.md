@@ -2,6 +2,86 @@
 This is a PyTorch implementation of the paper [PAMA](https://doi.org/10.1007/978-3-031-43987-2_69):
 
 
+### Patch feature extract
+
+The directory structure of WSI datasets:
+```
+PATH_to_datasets
+├─slide_1
+│  ├─overview.jpg
+│  │
+│  ├─Medium(20x)
+│  │      ├─patch_1.jpg
+│  │      ├─patch_2.jpg
+│  │      ├─.......
+│  │      └─patch_pm1.jpg
+│  │  
+│  ├─Overview(5x)
+│  │      ├─patch_1.jpg
+│  │      ├─patch_2.jpg
+│  │      ├─.......
+│  │      └─patch_po1.jpg
+│  │
+│  └─Small(10x)
+│         ├─patch_1.jpg
+│         ├─patch_2.jpg
+│         ├─.......
+│         └─patch_ps1.jpg
+├─slide_2
+│  ├─overview.jpg
+│  │
+│  ├─Medium(20x)
+│  │      ├─patch_1.jpg
+│  │      ├─patch_2.jpg
+│  │      ├─.......
+│  │      └─patch_pm2.jpg
+│  │  
+│  ├─Overview(5x)
+│  │      ├─patch_1.jpg
+│  │      ├─patch_2.jpg
+│  │      ├─.......
+│  │      └─patch_po2.jpg
+│  │
+│  └─Small(10x)
+│         ├─patch_1.jpg
+│         ├─patch_2.jpg
+│         ├─.......
+│         └─patch_ps2.jpg
+│
+└......
+```
+
+Extract patch features under 20× magnification and construct the WSI feature:
+```
+#!/bin/bash
+
+#SBATCH -w gpu0[1]
+#SBATCH --gres=gpu:1
+#SBATCH -N 1
+#SBATCH -p com
+#SBATCH --cpus-per-task=24
+#SBATCH -o dino_extract.log
+
+source activate my_base
+srun python ./extract_patch/extract_dino.py \
+  --dist-url 'tcp://localhost:10001' \
+  --multiprocessing-distributed \
+  --mask-level 3 \
+  --image-level 1 \
+  --arch vit_small \
+  --use_fp16 False \
+  --batch_size_per_gpu 512 \
+  --avgpool_patchtokens False \
+  --n_last_blocks 1 \
+  --checkpoint_key teacher \
+  --pretrained_weights PATH/dino_pretrained.pth \
+  --data_path './data/train.csv' \
+  --save-dir ./dino_WSI_features/ \
+  --error-txt ./dino_WSI_features/log/error.txt \
+  /PATH_to_datasets
+```
+
+
 
 ### Pre-train
 
@@ -26,7 +106,7 @@ srun python ./main_pretrain.py \
   --epochs 100 \
   --multiprocessing-distributed \
   --save-path ./checkpoints/tcgaLung_pama_pretrain \
-  /data_path
+  /dino_WSI_features
 
 ```
 
@@ -57,7 +137,7 @@ srun python ./main_finetune.py \
   --weighted-sample \
   --multiprocessing-distributed \
   --save-path ./tcgaLung_pama_finetune/ \
-  /data_path
+  /dino_WSI_features
 ```
 
 ```
@@ -84,7 +164,7 @@ srun python ./main_linprobe.py \
   --weighted-sample \
   --multiprocessing-distributed \
   --save-path ./tcgaLung_pama_linear/ \
-  /data_path
+  /dino_WSI_features
 ```
 
 
