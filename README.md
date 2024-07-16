@@ -1,5 +1,6 @@
 # PAMA:Position-aware masked autoencoder for histopathology WSI representation learning
-This is a PyTorch implementation of the paper [PAMA](https://doi.org/10.1007/978-3-031-43987-2_69):
+This is a PyTorch implementation of the conference paper [PAMA](https://doi.org/10.1007/978-3-031-43987-2_69) and [the extended version](
+https://doi.org/10.48550/arXiv.2407.07504).
 
 
 ### Patch feature extract
