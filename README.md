@@ -7,7 +7,7 @@ Kun Wu, Zhiguo Jiang, Kunming Tang, Jun Shi, Fengying Xie, Wei Wang, Haibo Wu, a
 ## 📢 News
 
 
-### June 2024
+### July 2024
 - **The extended version release**: We have extended [PAMA](
 https://doi.org/10.48550/arXiv.2407.07504) for pan-cancer analysis.
 
