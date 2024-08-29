@@ -1,6 +1,38 @@
-# PAMA:Position-aware masked autoencoder for histopathology WSI representation learning
-This is a PyTorch implementation of the conference paper [PAMA](https://doi.org/10.1007/978-3-031-43987-2_69) and [the extended version](
-https://doi.org/10.48550/arXiv.2407.07504).
+# PAMA
+## Pan-cancer Histopathology WSI Pre-training with Position-aware Masked Autoencoder
+
+Kun Wu, Zhiguo Jiang, Kunming Tang, Jun Shi, Fengying Xie, Wei Wang, Haibo Wu, and Yushan Zheng
+
+
+## 📢 News
+
+
+### June 2024
+- **The extended version release**: We have extended [PAMA](
+https://doi.org/10.48550/arXiv.2407.07504) for pan-cancer analysis.
+
+### May 2023
+- **The conference paper release**: The [PAMA paper](https://doi.org/10.1007/978-3-031-43987-2_69) has been accepted for *MICCAI 2023*.
+
+
+
+## Multi-organ pre-training strategy overview
+
+<p align="center">
+    <img src="images/PAMA_FRAMEWORK.png" width="90%"> <br>
+
+  *Overview of multi-organ pre-training with PAMA*
+
+</p>
+
+## Framework Overview
+
+<p align="center">
+    <img src="images/PAMA_sub.png" width="90%"> <br>
+
+  *Overview of PAMA architecture*
+
+</p>
 
 
 ### Patch feature extract
