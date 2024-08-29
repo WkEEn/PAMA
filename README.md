@@ -203,7 +203,7 @@ srun python ./main_linprobe.py \
 
 
 If the code is helpful to your research, please cite:
-```
+```bibtex
 @InProceedings{10.1007/978-3-031-43987-2_69,
 author="Wu, Kun 
 and Zheng, Yushan
