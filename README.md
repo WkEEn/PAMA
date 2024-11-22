@@ -6,6 +6,9 @@ Kun Wu, Zhiguo Jiang, Kunming Tang, Jun Shi, Fengying Xie, Wei Wang, Haibo Wu, a
 
 ## 📢 News
 
+### Oct 2024
+- **Upload pre-trianing file in Hugging Face**: We have uploaded multi-organ pre-training checkpoint in [Hugging Face](
+https://huggingface.co/wkeen/pama/tree/main).
 
 ### July 2024
 - **The extended version release**: We have extended [PAMA](
