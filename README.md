@@ -1,23 +1,32 @@
 # PAMA
+
 ## Pan-cancer Histopathology WSI Pre-training with Position-aware Masked Autoencoder
 
 Kun Wu, Zhiguo Jiang, Kunming Tang, Jun Shi, Fengying Xie, Wei Wang, Haibo Wu, and Yushan Zheng
 
-
 ## 📢 News
 
+### Dec 2024
+
+- **Upload TCGA pan cancer pre-trianing file in Hugging Face**: We have uploaded a new checkpoint in [Hugging Face](
+https://huggingface.co/wkeen/pama/tree/main) pre-trained on TCGA pan cancer dataset containing 4793 WSIs covering 10 cancer types.
+
+- **Upload slide embedding extracting file**: We have uploaded [extract_slide_embedding.py](https://github.com/WkEEn/PAMA/blob/main/extract_slide_embedding.py) for PAMA feartures inference.
+
+
 ### Oct 2024
+
 - **Upload pre-trianing file in Hugging Face**: We have uploaded multi-organ pre-training checkpoint in [Hugging Face](
 https://huggingface.co/wkeen/pama/tree/main).
 
 ### July 2024
+
 - **The extended version release**: We have extended [PAMA](
 https://doi.org/10.48550/arXiv.2407.07504) for pan-cancer analysis.
 
 ### May 2023
+
 - **The conference paper release**: The [PAMA paper](https://doi.org/10.1007/978-3-031-43987-2_69) has been accepted for *MICCAI 2023*.
-
-
 
 ## Multi-organ pre-training strategy overview
 
@@ -37,10 +46,10 @@ https://doi.org/10.48550/arXiv.2407.07504) for pan-cancer analysis.
 
 </p>
 
-
 ### Patch feature extract
 
 The directory structure of WSI datasets:
+
 ```
 PATH_to_datasets
 ├─slide_1
@@ -88,6 +97,7 @@ PATH_to_datasets
 ```
 
 Extract patch features under 20× magnification and construct the WSI feature:
+
 ```
 #!/bin/bash
 
@@ -117,11 +127,10 @@ srun python ./extract_patch/extract_dino.py \
   /PATH_to_datasets
 ```
 
-
-
 ### Pre-train
 
 Run the codes on the slurm with multiple GPUs:
+
 ```
 #!/bin/bash
 
@@ -149,6 +158,7 @@ srun python ./main_pretrain.py \
 ### Fine-tuning and linear-probing
 
 Run on on multiple GPUs:
+
 ```
 #!/bin/bash
 
@@ -203,9 +213,8 @@ srun python ./main_linprobe.py \
   /dino_WSI_features
 ```
 
-
-
 If the code is helpful to your research, please cite:
+
 ```bibtex
 @InProceedings{10.1007/978-3-031-43987-2_69,
 author="Wu, Kun 

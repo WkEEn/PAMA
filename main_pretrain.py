@@ -42,7 +42,7 @@ model_names = sorted(name for name in models.__dict__
     if name.islower() and not name.startswith("__")
     and callable(models.__dict__[name]))
 
-parser = argparse.ArgumentParser(description='MAE pre-training')
+parser = argparse.ArgumentParser(description='PAMA pre-training')
 parser.add_argument('root', metavar='DIR',
                     help='path to dataset')
 parser.add_argument('--train', default='../data/train.csv', type=str, metavar='PATH',

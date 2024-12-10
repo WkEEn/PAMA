@@ -230,7 +230,7 @@ class PamaViT(nn.Module):
 
         return x, kernel_tokens
 
-    def forward(self, imgs, wsi_rd, wsi_polar, token_mask, kernel_mask, device):
+    def forward(self, imgs, wsi_rd, wsi_polar, token_mask, kernel_mask, device, extract=False):
         b = imgs.shape[0]
         if self.training:
             wsi_rd, wsi_polar, kernel_mask = drop_kernel(wsi_rd, wsi_polar, kernel_mask, self.kernel_drop_rate)
@@ -248,6 +248,10 @@ class PamaViT(nn.Module):
         else:
             x = self.norm(latent)
             outcome = x[:, 0]
+        
+        if extract:
+            return outcome, kernel_tokens
+        
         logits = self.head(outcome)
         return logits, kernel_tokens
 
