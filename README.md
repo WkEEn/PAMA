@@ -8,6 +8,8 @@ Kun Wu, Zhiguo Jiang, Kunming Tang, Jun Shi, Fengying Xie, Wei Wang, Haibo Wu, a
 
 ### Dec 2024
 
+- **Our paper was accepted by TMI.**
+
 - **Upload TCGA pan cancer pre-trianing file in Hugging Face**: We have uploaded a new checkpoint in [Hugging Face](
 https://huggingface.co/wkeen/pama/tree/main) pre-trained on TCGA pan cancer dataset containing 4793 WSIs covering 10 cancer types.
 
