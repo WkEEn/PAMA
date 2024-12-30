@@ -218,6 +218,16 @@ srun python ./main_linprobe.py \
 If the code is helpful to your research, please cite:
 
 ```bibtex
+@article{wu2024pan,
+  title={Pan-cancer Histopathology WSI Pre-training with Position-aware Masked Autoencoder},
+  author={Wu, Kun and Jiang, Zhiguo and Tang, Kunming and Shi, Jun and Xie, Fengying and Wang, Wei and Wu, Haibo and Zheng, Yushan},
+  journal={IEEE Transactions on Medical Imaging},
+  year={2024},
+  publisher={IEEE}
+}
+```
+
+```bibtex
 @InProceedings{10.1007/978-3-031-43987-2_69,
 author="Wu, Kun 
 and Zheng, Yushan
